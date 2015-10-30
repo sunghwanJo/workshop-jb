@@ -12,10 +12,9 @@ fun todoTask5(client: Client?, message: String?, mailer: Mailer): Nothing = TODO
     references = { JavaCode5().sendMessageToClient(client, message, mailer) }
 )
 
-fun sendMessageToClient(
-        client: Client?, message: String?, mailer: Mailer
-) {
-    todoTask5(client, message, mailer)
+fun sendMessageToClient(client: Client?, message: String?, mailer: Mailer) {
+    var clientEmail: String = client?.personalInfo?.email ?: return
+    if(message != null) mailer.sendMessage(clientEmail, message) else return
 }
 
 class Client (val personalInfo: PersonalInfo?)
@@ -23,4 +22,4 @@ class PersonalInfo (val email: String?)
 
 interface Mailer {
     fun sendMessage(email: String, message: String)
-}
+}호

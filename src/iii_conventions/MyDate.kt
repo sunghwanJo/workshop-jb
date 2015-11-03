@@ -1,6 +1,13 @@
 package iii_conventions
 
-data class MyDate(val year: Int, val month: Int, val dayOfMonth: Int)
+import iv_properties.toMillis
+
+class MyDate(val year: Int, val month: Int, val dayOfMonth: Int) : Comparable<MyDate> {
+    override fun compareTo(other: MyDate): Int {
+        return (this.toMillis() - other.toMillis()).toInt()
+    }
+
+}
 
 enum class TimeInterval {
     DAY,

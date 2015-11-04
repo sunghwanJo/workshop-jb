@@ -7,7 +7,7 @@ class PropertyExample() {
     var propertyWithCounter: Int? = null
         set(value: Int?){
             counter++
-            field = val ue
+            field = value
         }
 }
 

@@ -19,7 +19,14 @@ enum class TimeInterval {
     YEAR
 }
 
+class RepeatedTimeInterval(val ti: TimeInterval, val n: Int);
+
+operator fun TimeInterval.times(timeNumber: Int) = RepeatedTimeInterval(this, timeNumber)
+
 operator fun MyDate.rangeTo(other: MyDate) = DateRange(this, other)
+operator fun MyDate.plus(timeInterval: TimeInterval) = addTimeIntervals(timeInterval, 1)
+operator fun MyDate.plus(repeatedTimeInterval: RepeatedTimeInterval)
+        = addTimeIntervals(repeatedTimeInterval.ti, repeatedTimeInterval.n )
 
 class DateRange(public override val start: MyDate, public override val end: MyDate) : Iterable<MyDate>, Range<MyDate> {
     override fun contains(item: MyDate): Boolean = start <= item && item <= end

@@ -1,10 +1,11 @@
 package iii_conventions
 
-import iv_properties.toMillis
-
 class MyDate(val year: Int, val month: Int, val dayOfMonth: Int) : Comparable<MyDate> {
     override fun compareTo(other: MyDate): Int {
-        return (this.toMillis() - other.toMillis()).toInt()
+        if (year != other.year) return year - other.year
+        if (month != other.month) return month - other.month
+        return dayOfMonth - other.dayOfMonth
+
     }
 
     override fun equals(other: Any?): Boolean {
@@ -20,7 +21,9 @@ enum class TimeInterval {
 
 operator fun MyDate.rangeTo(other: MyDate) = DateRange(this, other)
 
-class DateRange(public val start: MyDate, public val end: MyDate) : Iterable<MyDate> {
+class DateRange(public override val start: MyDate, public override val end: MyDate) : Iterable<MyDate>, Range<MyDate> {
+    override fun contains(item: MyDate): Boolean = start <= item && item <= end
+
     override fun iterator(): Iterator<MyDate> = DateIterator(this)
 }
 

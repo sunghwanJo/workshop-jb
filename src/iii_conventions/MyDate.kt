@@ -28,7 +28,6 @@ class DateIterator(val dateRange: DateRange) : Iterator<MyDate> {
     override fun next(): MyDate {
         val current = cursor
         cursor = cursor.nextDay()
-        println("current : ${current.year}.${current.month}.${current.dayOfMonth}")
         return current
     }
 
